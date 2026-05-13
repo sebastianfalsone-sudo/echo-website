@@ -268,25 +268,46 @@ img { max-width: 100%; display: block; }
   transform: translateY(-2px);
 }
 
-.hero-trust {
+.hero-signals {
   margin-top: 36px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 14px;
-  font-size: 13px;
-  color: var(--slate-soft);
 }
-.avatars {
+.signal-pills-row {
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
-.avatars img {
-  width: 32px; height: 32px;
+.signal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  background: var(--bg);
+  border: 1px solid var(--light-gray);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: 0.01em;
+}
+.signal-dot {
+  width: 8px; height: 8px;
   border-radius: 50%;
-  border: 2px solid #fff;
-  margin-left: -8px;
-  object-fit: cover;
+  display: inline-block;
+  flex-shrink: 0;
 }
-.avatars img:first-child { margin-left: 0; }
+.signal-dot.energy { background: #F59E0B; box-shadow: 0 0 0 3px rgba(245,158,11,0.18); }
+.signal-dot.mood   { background: var(--signal-teal); box-shadow: 0 0 0 3px rgba(20,184,166,0.18); }
+.signal-dot.focus  { background: #EF4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.18); }
+.signal-meta {
+  font-size: 13.5px;
+  color: var(--slate-soft);
+  max-width: 460px;
+  line-height: 1.55;
+}
+.signal-meta b { color: var(--navy); font-weight: 600; }
 
 /* ============================================================ PHONE MOCKUP */
 .phone-stack {
@@ -1220,13 +1241,172 @@ footer {
 }
 
 @media (max-width: 540px) {
+  /* Tighter container padding */
   .container { padding: 0 20px; }
-  .stats-grid { grid-template-columns: 1fr 1fr; }
-  .stat-num { font-size: 34px; }
-  .footer-top { grid-template-columns: 1fr; }
-  .phone { width: 240px; height: 500px; }
-  .phone-1 { transform: translateX(-70px) rotate(-6deg) scale(0.92); }
-  .phone-3 { transform: translateX(70px) rotate(6deg) scale(0.92); }
+
+  /* Hero: tighter spacing + readable type */
+  .hero { padding: 110px 0 60px; }
+  .hero h1 { font-size: clamp(34px, 10vw, 52px); margin-bottom: 20px; }
+  .hero-lede { font-size: 17px; margin-bottom: 28px; }
+  .eyebrow { margin-bottom: 22px; }
+  .hero-tagline {
+    gap: 6px 14px;
+    margin-bottom: 30px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+  }
+  .hero-tagline span:not(:last-child)::after { right: -6px; }
+
+  /* CTAs stack full-width and become tap-friendly */
+  .hero-cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hero-cta-row .btn-primary,
+  .hero-cta-row .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 16px 22px;
+  }
+
+  /* Hero signal pills */
+  .hero-signals { margin-top: 28px; }
+  .signal-pill { padding: 6px 12px; font-size: 12.5px; }
+  .signal-meta { font-size: 13px; }
+
+  /* Phone carousel: show only active, stack centered (no horizontal overflow) */
+  .phone-stack { height: 540px; }
+  .phone {
+    width: 250px;
+    height: 520px;
+  }
+  .phone-1, .phone-2, .phone-3 {
+    transform: translateX(0) translateY(0) scale(0.96) rotate(0);
+  }
+  .phone-1.active,
+  .phone-2.active,
+  .phone-3.active {
+    transform: translateX(0) translateY(0) scale(1.02) rotate(0);
+  }
+  .phone:not(.active) {
+    opacity: 0;
+    pointer-events: none;
+    filter: none;
+  }
+
+  /* Larger touch-friendly carousel indicators */
+  .phone-indicators {
+    bottom: -14px;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+  .phone-indicator {
+    height: 6px;
+    width: 26px;
+  }
+  .phone-indicator.active { width: 40px; }
+
+  /* Stats: tighter padding, 2x2 grid */
+  .stats { padding: 44px 0; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
+  .stat-num { font-size: 36px; }
+  .stat-label { font-size: 12px; }
+
+  /* Sections: tighter padding throughout */
+  .section { padding: 70px 0; }
+  .section-head-center { margin-bottom: 48px; }
+  .section-title { font-size: clamp(28px, 8vw, 40px); }
+  .section-lede { font-size: 16px; }
+
+  /* Steps + Features: tighter cards */
+  .step { padding: 32px 24px; }
+  .feature { padding: 28px 24px; }
+  .feature-hero {
+    padding: 36px 28px;
+    min-height: auto;
+  }
+  .feature-hero h3 { font-size: 28px; }
+  .feature-hero p { font-size: 15px; }
+
+  /* For-active section */
+  .for-active { padding: 70px 0; }
+  .fa-img-stack { height: 380px; }
+  .fa-img-overlay {
+    width: 200px;
+    right: 8px;
+    bottom: -12px;
+    padding: 16px 18px;
+  }
+  .fa-overlay-quote { font-size: 12px; }
+  .fa-points li { padding: 16px 0; gap: 12px; }
+  .fa-points h5 { font-size: 16px; }
+  .fa-points p { font-size: 13.5px; }
+
+  /* Personal comparison section */
+  .personal { padding: 70px 0; }
+  .personal-card { padding: 28px 22px; gap: 20px; }
+  .personal-name { font-size: 16px; }
+  .personal-outcome { padding: 12px 16px; }
+  .personal-outcome-score { font-size: 19px; }
+  .personal-quote { font-size: 14.5px; padding-left: 14px; }
+  .personal-pillars { gap: 32px; margin-top: 56px; padding-top: 44px; }
+  .personal-pillar h5 { font-size: 18px; }
+
+  /* Science section */
+  .science-grid { gap: 48px; }
+  .pattern-viz { padding: 24px; }
+  .pattern-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+  .pattern-title { font-size: 16px; }
+  .insight-card { padding: 14px 16px; gap: 12px; }
+  .insight-card-text { font-size: 12.5px; }
+
+  /* Testimonials */
+  .t-card { padding: 28px 24px; }
+  .t-text { font-size: 15.5px; margin-bottom: 20px; }
+
+  /* FAQ */
+  .faq { padding: 70px 0; }
+  .faq-list { gap: 10px; margin-top: 40px; }
+  .faq-item summary {
+    padding: 18px 20px;
+    font-size: 15px;
+    gap: 12px;
+  }
+  .faq-item p {
+    padding: 0 20px 18px;
+    font-size: 14px;
+  }
+  .faq-item summary::after {
+    width: 26px; height: 26px;
+    font-size: 16px;
+  }
+
+  /* CTA card: tighter padding */
+  .cta { padding: 60px 0 100px; }
+  .cta-card { padding: 56px 24px; }
+  .cta-card h2 { font-size: clamp(28px, 8vw, 42px); }
+  .cta-card p { font-size: 16px; margin-bottom: 28px; }
+  .cta-row { gap: 10px; }
+  .store-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 18px;
+  }
+
+  /* Footer */
+  footer { padding: 44px 0 32px; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; margin-bottom: 36px; }
+  .footer-bottom { gap: 16px; }
+
+  /* Nav: keep brand+hamburger compact */
+  .nav { padding: 14px 0; }
+  .nav-brand .brand-icon { width: 30px; height: 30px; }
+  .nav-brand .brand-wordmark { height: 19px; }
+  .nav-cta {
+    display: none; /* on tiny screens, rely on the hamburger; saves room */
+  }
 }
 
 /* Subtle fade-in */
