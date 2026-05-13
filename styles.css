@@ -1318,55 +1318,6 @@ footer {
 .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 22px; }
 
 /* ============================================================
-   Press / "As featured in" strip
-   ============================================================ */
-.press {
-  padding: 36px 0 16px;
-  background: var(--bg);
-}
-.press-label {
-  text-align: center;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.24em;
-  color: var(--slate-soft);
-  margin-bottom: 28px;
-  text-transform: uppercase;
-}
-.press-logos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 56px;
-  flex-wrap: wrap;
-  filter: grayscale(100%);
-  opacity: 0.55;
-  transition: opacity 0.4s, filter 0.4s;
-}
-.press-logos:hover { opacity: 0.9; filter: grayscale(40%); }
-.press-logos span {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 800;
-  font-size: 19px;
-  letter-spacing: 0.05em;
-  color: var(--navy);
-  white-space: nowrap;
-}
-.press-logos span.serif {
-  font-family: 'Times New Roman', Georgia, serif;
-  font-style: italic;
-  font-weight: 700;
-  font-size: 22px;
-  letter-spacing: 0;
-}
-
-@media (max-width: 760px) {
-  .press-logos { gap: 28px 36px; }
-  .press-logos span { font-size: 15px; }
-  .press-logos span.serif { font-size: 17px; }
-}
-
-/* ============================================================
    FAQ
    ============================================================ */
 .faq { background: var(--bg); padding: 100px 0; }
